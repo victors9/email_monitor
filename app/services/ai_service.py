@@ -41,6 +41,31 @@ class AIService:
             logger.error(f"Erro ao chamar Ollama: {e}")
             return None
     
+    def _call_ollama_chat(self, messages: list) -> str:
+        """
+        Chama Ollama com histórico de conversa.
+        
+        Args:
+            messages: Lista de mensagens [{'role': 'user/assistant', 'content': '...'}]
+        
+        Returns:
+            Resposta da IA
+        """
+        try:
+            response = ollama.chat(
+                model=self.model,
+                messages=messages,
+                options={
+                    'temperature': 0.7,  # Mais conversacional
+                    'num_predict': 300,  # Permite respostas maiores
+                }
+            )
+            return response['message']['content'].strip()
+        
+        except Exception as e:
+            logger.error(f"Erro ao chamar Ollama chat: {e}")
+            return "Desculpe, tive um problema ao processar sua mensagem."
+    
     def classify_urgency(self, email: dict) -> str:
         """
         Classifica a urgência do email em: ALTA, MÉDIA, BAIXA.
