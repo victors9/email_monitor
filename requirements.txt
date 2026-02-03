@@ -1,0 +1,14 @@
+# Autenticação Microsoft
+msal==1.28.0
+
+# HTTP Requests
+requests==2.31.0
+
+# Integração com Ollama
+ollama==0.3.0
+
+# Configuração
+python-decouple==3.8
+
+# Utilitários
+python-dateutil==2.8.2
